@@ -5,6 +5,7 @@ from tkinter import Tk, Label, Text, Scrollbar, messagebox
 from tkinter import Button as TkButton
 from tkinter import ttk
 from tkinter.filedialog import askopenfilenames
+import threading
 
 BG_COLOR = "#1e1e1e"
 FG_COLOR = "#ffffff"
@@ -92,7 +93,7 @@ def enter_urls():
         urls = url_box.get("1.0", "end-1c").splitlines()
         win.destroy()
         if urls:
-            process_urls(urls)
+            threading.Thread(target=process_urls, args=(urls,)).start()
         else:
             messagebox.showwarning("No URLs", "You didn't enter any URLs.")
 
