@@ -1,4 +1,4 @@
-APP_NAME = app.py
+APP_NAME = src/app.py
 PYTHON = python3
 PIP = pip3
 
@@ -11,6 +11,6 @@ run:
 	$(PYTHON) $(APP_NAME)
 
 clean:
-	rm -rf __pycache__ videos output file_list.txt
+	rm -rf __pycache__ src/__pycache__ file_list.txt videos output
 
 .PHONY: all install run clean
