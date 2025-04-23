@@ -12,6 +12,8 @@ BTN_BG = "#333333"
 BTN_FG = "#ffffff"
 ENTRY_BG = "#2d2d2d"
 BTN_HOVER_BG = "#555555"
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 400
 
 def select_videos():
     return askopenfilenames(title="Select videos", filetypes=[("MP4 files", "*.mp4"), ("All files", "*.*")])
@@ -64,8 +66,8 @@ def make_button(master, text, command):
                     background=BTN_BG,
                     foreground=BTN_FG,
                     borderwidth=0,
-                    font=('Segoe UI', 10),
-                    padding=10)
+                    font=('Segoe UI', 14),  
+                    padding=15) 
     style.map("Dark.TButton",
               background=[('active', BTN_HOVER_BG)],
               foreground=[('active', FG_COLOR)])
@@ -75,11 +77,12 @@ def enter_urls():
     win = Tk()
     win.title("Enter Video URLs")
     win.configure(bg=BG_COLOR)
+    win.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
-    Label(win, text="Enter URLs (one per line):", bg=BG_COLOR, fg=FG_COLOR, font=('Segoe UI', 10)).pack(pady=(10, 0))
+    Label(win, text="Enter URLs (one per line):", bg=BG_COLOR, fg=FG_COLOR, font=('Segoe UI', 14)).pack(pady=(20, 0))
 
-    url_box = Text(win, height=10, width=50, bg=ENTRY_BG, fg=FG_COLOR, insertbackground=FG_COLOR, bd=0)
-    url_box.pack(pady=10)
+    url_box = Text(win, height=10, width=50, bg=ENTRY_BG, fg=FG_COLOR, insertbackground=FG_COLOR, bd=0, font=('Segoe UI', 12))
+    url_box.pack(pady=20)
 
     scroll = Scrollbar(win, command=url_box.yview)
     scroll.pack(side='right', fill='y')
@@ -93,7 +96,7 @@ def enter_urls():
         else:
             messagebox.showwarning("No URLs", "You didn't enter any URLs.")
 
-    make_button(win, "Download & Merge", submit).pack(pady=(0, 10))
+    make_button(win, "Download & Merge", submit).pack(pady=(0, 20))
 
     win.mainloop()
 
@@ -103,21 +106,20 @@ def process_urls(urls):
 
 def select_videos_action():
     vids = select_videos()
-    if len(vids) < 2:
-        messagebox.showwarning("Not enough videos", "Pick at least two videos.")
-        return
-    create_file_list(vids, [])
+    create_file_list(vids, []) 
     concat_videos()
 
 def main_menu():
     win = Tk()
     win.title("Video Joiner")
     win.configure(bg=BG_COLOR)
+    
+    win.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
-    Label(win, text="Choose an option:", bg=BG_COLOR, fg=FG_COLOR, font=('Segoe UI', 12)).pack(pady=20)
+    Label(win, text="Choose an option:", bg=BG_COLOR, fg=FG_COLOR, font=('Segoe UI', 16)).pack(pady=30)
 
-    make_button(win, "Pick videos from PC", select_videos_action).pack(pady=10)
-    make_button(win, "Download videos from URLs", enter_urls).pack(pady=10)
+    make_button(win, "Pick videos from PC", select_videos_action).pack(pady=15)
+    make_button(win, "Download videos from URLs", enter_urls).pack(pady=15)
 
     win.mainloop()
 
