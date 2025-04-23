@@ -46,7 +46,6 @@ def concat_videos(file_list="file_list.txt", output_dir="output"):
         os.makedirs(output_dir, exist_ok=True)
         out_file = get_unique_filename(output_dir)
         ffmpeg.input(file_list, format='concat', safe=0).output(out_file, c='copy').run()
-        messagebox.showinfo("Done", f"Videos merged!\nSaved as {out_file}")
     except ffmpeg.Error as e:
         messagebox.showerror("Error", f"Something went wrong:\n{e.stderr.decode()}")
 
