@@ -13,3 +13,7 @@ merge multiple videos into one file
 To install the Python libraries:
 ```bash
 pip install yt-dlp ffmpeg-python
+```
+
+![tkinter](./img/tkinter.png)
+
